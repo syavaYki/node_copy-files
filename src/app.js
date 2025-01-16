@@ -34,7 +34,7 @@ try {
 
   fs.copyFile(source, destination, (err) => {
     if (err) {
-      throw err;
+      console.error(err);
     }
     console.log(`File copied from ${source} to ${destination}`);
   });
