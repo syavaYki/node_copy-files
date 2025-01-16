@@ -4,11 +4,9 @@ import fs from 'fs';
 
 const args = process.argv.slice(2);
 
-console.log('Command-line arguments:', args);
-
-if (args.length === 4) {
+if (args.length !== 2) {
   console.error('Usage: node app.js <source> <destination>');
-  process.exit(1);
+  process.exit(0);
 }
 
 const [source, destination] = args;
@@ -23,6 +21,7 @@ try {
 
   if (!sourceStats.isFile()) {
     console.error('Source is not a file.');
+    process.exit(0);
   }
 
   const destinationStats =
@@ -30,6 +29,7 @@ try {
 
   if (destinationStats && destinationStats.isDirectory()) {
     console.error('Destination is a directory.');
+    process.exit(0);
   }
 
   fs.copyFile(source, destination, (err) => {
